@@ -1,5 +1,6 @@
 const path = require('node:path');
 const { randomUUID } = require('node:crypto');
+const fs = require('node:fs/promises');
 const { storageDir } = require('../config');
 
 const documents = new Map();
@@ -32,4 +33,8 @@ function getFilePath(document) {
   return path.join(storageDir, document.storageName);
 }
 
-module.exports = { save, findByOwner, findById, getFilePath };
+function removeFile(filePath) {
+  return fs.unlink(filePath);
+}
+
+module.exports = { save, findByOwner, findById, getFilePath, removeFile };

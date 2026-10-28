@@ -1,4 +1,3 @@
-const fs = require('node:fs/promises');
 const documentRepository = require('../repositories/documentRepository');
 
 class DocumentError extends Error {
@@ -17,7 +16,7 @@ async function upload({ file, owner }) {
   try {
     return documentRepository.save({ file, owner });
   } catch (error) {
-    await fs.unlink(file.path).catch(() => {});
+    await documentRepository.removeFile(file.path).catch(() => {});
     throw error;
   }
 }
