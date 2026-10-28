@@ -1,5 +1,6 @@
 const documentService = require('../services/documentService');
 
+
 function requireUser(req, res, next) {
   const owner = req.get('X-User-Id')?.trim();
 
